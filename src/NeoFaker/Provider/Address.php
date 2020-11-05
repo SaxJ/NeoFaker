@@ -1,6 +1,6 @@
 <?php
 
-namespace Faker\Provider;
+namespace NeoFaker\Provider;
 
 class Address extends Base
 {
