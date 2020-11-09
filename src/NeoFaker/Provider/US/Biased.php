@@ -1,8 +1,10 @@
 <?php
 
-namespace Faker\Provider;
+namespace NeoFaker\Provider;
 
-class Biased extends Base
+use NeoFaker\Provider\Contract\Biased as BiasedContract;
+
+class Biased extends Base implements BiasedContract
 {
     /**
      * Returns a biased integer between $min and $max (both inclusive).
@@ -19,7 +21,7 @@ class Biased extends Base
      * @param callable $function A function mapping x ∈ [0, 1] onto a double ∈ [0, 1]
      * @return integer An integer between $min and $max.
      */
-    public function biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt')
+    public function biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt'): int
     {
         do {
             $x = mt_rand() / mt_getrandmax();
