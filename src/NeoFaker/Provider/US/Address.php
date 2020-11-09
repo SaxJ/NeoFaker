@@ -1,8 +1,11 @@
 <?php
 
-namespace NeoFaker\Provider;
+namespace NeoFaker\Provider\US;
 
-class Address extends Base
+use NeoFaker\Provider\Contract\Address as AddressContract;
+use NeoFaker\Provider\Contract\Coordinates;
+
+class Address extends Base implements AddressContract
 {
     protected static $citySuffix = array('Ville');
     protected static $streetSuffix = array('Street');
@@ -26,7 +29,7 @@ class Address extends Base
     /**
      * @example 'town'
      */
-    public static function citySuffix()
+    public  function citySuffix(): string
     {
         return static::randomElement(static::$citySuffix);
     }
@@ -34,7 +37,7 @@ class Address extends Base
     /**
      * @example 'Avenue'
      */
-    public static function streetSuffix()
+    public  function streetSuffix(): string
     {
         return static::randomElement(static::$streetSuffix);
     }
@@ -42,7 +45,7 @@ class Address extends Base
     /**
      * @example '791'
      */
-    public static function buildingNumber()
+    public  function buildingNumber(): string
     {
         return static::numerify(static::randomElement(static::$buildingNumber));
     }
@@ -50,7 +53,7 @@ class Address extends Base
     /**
      * @example 'Sashabury'
      */
-    public function city()
+    public function city(): string
     {
         $format = static::randomElement(static::$cityFormats);
 
@@ -60,7 +63,7 @@ class Address extends Base
     /**
      * @example 'Crist Parks'
      */
-    public function streetName()
+    public function streetName(): string
     {
         $format = static::randomElement(static::$streetNameFormats);
 
@@ -70,7 +73,7 @@ class Address extends Base
     /**
      * @example '791 Crist Parks'
      */
-    public function streetAddress()
+    public function streetAddress(): string
     {
         $format = static::randomElement(static::$streetAddressFormats);
 
@@ -80,7 +83,7 @@ class Address extends Base
     /**
      * @example 86039-9874
      */
-    public static function postcode()
+    public function postcode(): string
     {
         return static::toUpper(static::bothify(static::randomElement(static::$postcode)));
     }
@@ -88,7 +91,7 @@ class Address extends Base
     /**
      * @example '791 Crist Parks, Sashabury, IL 86039-9874'
      */
-    public function address()
+    public function address(): string
     {
         $format = static::randomElement(static::$addressFormats);
 
@@ -98,7 +101,7 @@ class Address extends Base
     /**
      * @example 'Japan'
      */
-    public static function country()
+    public function country(): string
     {
         return static::randomElement(static::$country);
     }
@@ -109,7 +112,7 @@ class Address extends Base
      * @param float|int $max
      * @return float Uses signed degrees format (returns a float number between -90 and 90)
      */
-    public static function latitude($min = -90, $max = 90)
+    public function latitude($min = -90, $max = 90): float
     {
         return static::randomFloat(6, $min, $max);
     }
@@ -120,7 +123,7 @@ class Address extends Base
      * @param float|int $max
      * @return float Uses signed degrees format (returns a float number between -180 and 180)
      */
-    public static function longitude($min = -180, $max = 180)
+    public function longitude($min = -180, $max = 180): float
     {
         return static::randomFloat(6, $min, $max);
     }
@@ -129,11 +132,8 @@ class Address extends Base
      * @example array('77.147489', '86.211205')
      * @return array | latitude, longitude
      */
-    public static function localCoordinates()
+    public function localCoordinates(): Coordinates
     {
-        return array(
-            'latitude' => static::latitude(),
-            'longitude' => static::longitude()
-        );
+        return new Coordinates($this->latitude(), $this->longitude());
     }
 }

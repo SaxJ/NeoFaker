@@ -1,6 +1,6 @@
 <?php
 
-namespace NeoFaker\Provider;
+namespace NeoFaker\Provider\US;
 
 use Faker\Generator;
 use Faker\DefaultGenerator;
