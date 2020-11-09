@@ -1,8 +1,10 @@
 <?php
 
-namespace Faker\Provider;
+namespace NeoFaker\Provider\US;
 
-class Company extends Base
+use NeoFaker\Provider\Contract\Company as CompanyContract;
+
+class Company extends Base implements CompanyContract
 {
     protected static $formats = array(
         '{{lastName}} {{companySuffix}}',
@@ -19,7 +21,7 @@ class Company extends Base
      *
      * @return string
      */
-    public function company()
+    public function company(): string
     {
         $format = static::randomElement(static::$formats);
 
@@ -31,7 +33,7 @@ class Company extends Base
      *
      * @return string
      */
-    public static function companySuffix()
+    public  function companySuffix(): string
     {
         return static::randomElement(static::$companySuffix);
     }
@@ -41,7 +43,7 @@ class Company extends Base
      *
      * @return string
      */
-    public function jobTitle()
+    public function jobTitle(): string
     {
         $format = static::randomElement(static::$jobTitleFormat);
 
