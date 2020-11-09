@@ -13,5 +13,5 @@ interface Colour
     public function safeColourName(): string;
     public function colourName(): string;
     public function hslColour(): string;
-    public function hslColourAsArray(): string;
+    public function hslColourAsArray(): array;
 }
