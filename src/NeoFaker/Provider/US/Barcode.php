@@ -1,12 +1,14 @@
 <?php
 
-namespace Faker\Provider;
+namespace NeoFaker\Provider\US;
+
+use NeoFaker\Provider\Contract\Barcode as BarcodeContract;
 
 /**
  * @see http://en.wikipedia.org/wiki/EAN-13
  * @see http://en.wikipedia.org/wiki/ISBN
  */
-class Barcode extends Base
+class Barcode extends Base implements BarcodeContract
 {
     private function ean($length = 13)
     {
@@ -61,7 +63,7 @@ class Barcode extends Base
         $result = (11 - array_sum($digits) % 11) % 11;
 
         // 10 is replaced by X
-        return ($result < 10)?$result:'X';
+        return ($result < 10) ? $result : 'X';
     }
 
     /**
@@ -69,7 +71,7 @@ class Barcode extends Base
      * @return string
      * @example '4006381333931'
      */
-    public function ean13()
+    public function ean13(): string
     {
         return $this->ean(13);
     }
@@ -79,7 +81,7 @@ class Barcode extends Base
      * @return string
      * @example '73513537'
      */
-    public function ean8()
+    public function ean8(): string
     {
         return $this->ean(8);
     }
@@ -91,7 +93,7 @@ class Barcode extends Base
      * @return string
      * @example '4881416324'
      */
-    public function isbn10()
+    public function isbn10(): string
     {
         $code = static::numerify(str_repeat('#', 9));
 
@@ -105,7 +107,7 @@ class Barcode extends Base
      * @return string
      * @example '9790404436093'
      */
-    public function isbn13()
+    public function isbn13(): string
     {
         $code = '97' . static::numberBetween(8, 9) . static::numerify(str_repeat('#', 9));
 
