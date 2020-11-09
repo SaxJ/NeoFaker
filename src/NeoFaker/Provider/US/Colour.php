@@ -1,19 +1,21 @@
 <?php
 
-namespace Faker\Provider;
+namespace NeoFaker\Provider\US;
+
+use NeoFaker\Provider\Contract\Colour as ColourContract;
 
 /**
  * @author lsv
  */
-class Color extends Base
+class Colour extends Base implements ColourContract
 {
-    protected static $safeColorNames = array(
+    protected static $safeColourNames = array(
         'black', 'maroon', 'green', 'navy', 'olive',
         'purple', 'teal', 'lime', 'blue', 'silver',
         'gray', 'yellow', 'fuchsia', 'aqua', 'white'
     );
 
-    protected static $allColorNames = array(
+    protected static $allColourNames = array(
         'AliceBlue', 'AntiqueWhite', 'Aqua', 'Aquamarine',
         'Azure', 'Beige', 'Bisque', 'Black', 'BlanchedAlmond',
         'Blue', 'BlueViolet', 'Brown', 'BurlyWood', 'CadetBlue',
@@ -45,7 +47,7 @@ class Color extends Base
     /**
      * @example '#fa3cc2'
      */
-    public static function hexColor()
+    public function hexColour(): string
     {
         return '#' . str_pad(dechex(mt_rand(1, 16777215)), 6, '0', STR_PAD_LEFT);
     }
@@ -53,7 +55,7 @@ class Color extends Base
     /**
      * @example '#ff0044'
      */
-    public static function safeHexColor()
+    public  function safeHexColour(): string
     {
         $color = str_pad(dechex(mt_rand(0, 255)), 3, '0', STR_PAD_LEFT);
 
@@ -63,9 +65,9 @@ class Color extends Base
     /**
      * @example 'array(0,255,122)'
      */
-    public static function rgbColorAsArray()
+    public function rgbColourAsArray(): string
     {
-        $color = static::hexColor();
+        $color = $this->hexColour();
 
         return array(
             hexdec(substr($color, 1, 2)),
@@ -77,48 +79,48 @@ class Color extends Base
     /**
      * @example '0,255,122'
      */
-    public static function rgbColor()
+    public  function rgbColour(): string
     {
-        return implode(',', static::rgbColorAsArray());
+        return implode(',', $this->rgbColourAsArray());
     }
 
     /**
      * @example 'rgb(0,255,122)'
      */
-    public static function rgbCssColor()
+    public  function rgbCssColour(): string
     {
-        return 'rgb(' . static::rgbColor() . ')';
+        return 'rgb(' . $this->rgbColour() . ')';
     }
 
     /**
      * @example 'rgba(0,255,122,0.8)'
      */
-    public static function rgbaCssColor()
+    public  function rgbaCssColour(): string
     {
-        return 'rgba(' . static::rgbColor() . ',' . static::randomFloat(1, 0, 1) . ')';
+        return 'rgba(' . $this->rgbColour() . ',' . static::randomFloat(1, 0, 1) . ')';
     }
 
     /**
      * @example 'blue'
      */
-    public static function safeColorName()
+    public  function safeColourName(): string
     {
-        return static::randomElement(static::$safeColorNames);
+        return static::randomElement(static::$safeColourNames);
     }
 
     /**
      * @example 'NavajoWhite'
      */
-    public static function colorName()
+    public  function colourName(): string
     {
-        return static::randomElement(static::$allColorNames);
+        return static::randomElement(static::$allColourNames);
     }
 
     /**
      * @example '340,50,20'
      * @return string
      */
-    public static function hslColor()
+    public  function hslColour(): string
     {
         return sprintf(
             '%s,%s,%s',
@@ -132,7 +134,7 @@ class Color extends Base
      * @example array(340, 50, 20)
      * @return array
      */
-    public static function hslColorAsArray()
+    public  function hslColourAsArray(): array
     {
         return array(
             static::numberBetween(0, 360),
