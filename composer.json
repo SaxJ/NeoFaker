@@ -1,9 +1,10 @@
 {
-    "name": "fzaninotto/faker",
+    "name": "saxj/neofaker",
     "type": "library",
-    "description": "Faker is a PHP library that generates fake data for you.",
+    "description": "NeoFaker is a PHP library that generates fake data for you.",
     "keywords": [
         "faker",
+        "neofaker",
         "fixtures",
         "data"
     ],
@@ -11,10 +12,13 @@
     "authors": [
         {
             "name": "François Zaninotto"
+        },
+        {
+            "name": "Saxon Jensen"
         }
     ],
     "require": {
-        "php": "^5.3.3 || ^7.0 || ^8.0"
+        "php": "^7.0 || ^8.0"
     },
     "require-dev": {
         "ext-intl": "*",
@@ -23,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Faker\\": "src/Faker/"
+            "Faker\\": "src/NeoFaker/"
         }
     },
     "autoload-dev": {
